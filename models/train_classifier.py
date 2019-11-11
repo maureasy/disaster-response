@@ -18,7 +18,7 @@ def load_data(database_filepath):
     df = pd.read_sql_table('disaster', conn)
     X = df['message'] 
     y = df.iloc[:,3:]
-    return X,y
+    return X,y,y.columns
 
 
 def tokenize(text):
@@ -34,11 +34,12 @@ def build_model():
         ("tfidf", TfidfTransformer()), 
         ("clf", MultiOutputClassifier(RandomForestClassifier()))
          ])
+    
     return pipeline
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
-    pass
+
 
 
 def save_model(model, model_filepath):

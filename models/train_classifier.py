@@ -1,8 +1,24 @@
 import sys
-
+import pandas as pd
+from sqlalchemy import create_engine
+from sklearn.multioutput import MultiOutputClassifier
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import CountVectorizer,TfidfTransformer
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+import re
+from sklearn.metrics import classification_report
+import numpy as np
+from sklearn.model_selection import GridSearchCV
+import pickle
 
 def load_data(database_filepath):
-    pass
+    engine = create_engine(str('sqlite:///'+database_filepath))
+    conn = engine.connect()
+    df = pd.read_sql_table('disaster', conn)
+    X = df['message'] 
+    y = df.iloc[:,3:]
+    return X,y
 
 
 def tokenize(text):

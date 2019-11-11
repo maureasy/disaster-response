@@ -22,8 +22,11 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
-    pass
-
+    text_no_punct =re.sub(r"[^A-Za-z0-9 _]"," ",text)
+    
+    text_split = text_no_punct.split()
+    text_clean = [x.strip(' ') for x in text_split]
+    return text_clean
 
 def build_model():
     pass

@@ -30,7 +30,7 @@ def clean_data(df):
     return df
 
 def save_data(df, database_filename):
-    engine = create_engine(database_filename)
+    engine = create_engine("sqlite:///"+database_filename)
     df.to_sql('disastermessages', engine, index=False)
 
 
@@ -47,7 +47,7 @@ def main():
         df = clean_data(df)
         
         print('Saving data...\n    DATABASE: {}'.format(database_filepath))
-        #save_data(df, database_filepath)
+        save_data(df, database_filepath)
         
         print('Cleaned data saved to database!')
     

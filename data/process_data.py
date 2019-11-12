@@ -25,7 +25,7 @@ def clean_data(df):
         # convert column from string to numeric
         categories[column] = [int(x) for x in categories[column]]
     df = df.drop(["categories"], axis=1)
-    df = pd.merge(df,categories, on="id")    
+    df = pd.concat([df,categories], axis=1)   
     df = df.drop_duplicates(["message"])  
     return df
 
@@ -47,7 +47,7 @@ def main():
         df = clean_data(df)
         
         print('Saving data...\n    DATABASE: {}'.format(database_filepath))
-        save_data(df, database_filepath)
+        #save_data(df, database_filepath)
         
         print('Cleaned data saved to database!')
     

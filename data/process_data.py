@@ -21,9 +21,9 @@ def clean_data(df):
     categories.columns = category_colnames
     for column in categories:
         # set each value to be the last character of the string
-        categories[column] = [x[-1] for x in categories[column]]    
+        categories[column] = [int(x[-1]) for x in categories[column]]    
         # convert column from string to numeric
-        categories[column] = [int(x) for x in categories[column]]
+        #categories[column] = [int(x) for x in categories[column]]
     df = df.drop(["categories"], axis=1)
     df = pd.concat([df,categories], axis=1)   
     df = df.drop_duplicates(["message"])  

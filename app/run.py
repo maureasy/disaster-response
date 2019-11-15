@@ -50,7 +50,7 @@ def index():
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
 
-           # TODO set the x range           
+         
            {
             
             'data': 
@@ -65,7 +65,8 @@ def index():
                     'title': "Count"
                 },
                 'xaxis': {
-                    'title': "Number of characters in message"
+                    'title': "Number of characters in message",
+                    'range': [0,1000]
                 }
             }
         }

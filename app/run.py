@@ -1,5 +1,6 @@
 import json
 import plotly
+
 import pandas as pd
 
 from nltk.stem import WordNetLemmatizer
@@ -28,7 +29,6 @@ def tokenize(text):
 # load data
 engine = create_engine('sqlite:///../data/DisasterResponse.db')
 df = pd.read_sql_table('disastermessages', engine)
-
 # load model
 model = joblib.load("../models/classifier.pkl")
 
@@ -42,11 +42,34 @@ def index():
     # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
+
+    #df["message"].str.len()
+    
     
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
-        {
+
+                      
+           {
+            
+            'data': 
+                [{'type':'histogram',
+                 'x' : df["message"].str.len()
+                }]
+            ,
+
+            'layout': {
+                'title': 'Lenght of Messages',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Number of characters in message"
+                }
+            }
+        }
+        ,{
             'data': [
                 Bar(
                     x=genre_names,

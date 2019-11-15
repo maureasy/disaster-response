@@ -50,7 +50,7 @@ def index():
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
 
-                      
+           # TODO set the x range           
            {
             
             'data': 

@@ -42,8 +42,7 @@ def index():
     # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
-
-    #df["message"].str.len()
+    percent_messages = [df[i].sum()/df[i].count() for i in df.columns[4:]]   
     
     
     # create visuals
@@ -66,25 +65,23 @@ def index():
                 },
                 'xaxis': {
                     'title': "Number of characters in message",
-                    'range': [0,1000]
+                    'range': [0,1000] # Taking out the outliers.
                 }
             }
         }
         ,{
-            'data': [
-                Bar(
-                    x=genre_names,
-                    y=genre_counts
-                )
-            ],
+            'data':  [{'type':'bar',
+                 'x' : list(df.columns)[4:],
+                 'y' : percent_messages
+                }],
 
             'layout': {
-                'title': 'Distribution of Message Genres',
+                'title': 'Classification',
                 'yaxis': {
-                    'title': "Count"
+                    'title': "Percentage of with this classification"
                 },
                 'xaxis': {
-                    'title': "Genre"
+                    'title': "Classification"
                 }
             }
         }

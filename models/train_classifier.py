@@ -33,8 +33,18 @@ def build_model():
         ("tfidf", TfidfTransformer()), 
         ("clf", MultiOutputClassifier(RandomForestClassifier()))
          ])
+      
+    parameters = {
+        'tfidf__smooth_idf': [True, False],
+        'clf__estimator__criterion': ['gini', 'entropy'],
+        'clf__estimator__bootstrap': [True,False],
+        'clf__estimator__max_depth': [5,10,25],
+        'clf__estimator__max_features' : ["auto","sqrt","log2"]
+        }
+
+    cv = GridSearchCV(pipeline, param_grid=parameters,n_jobs=-1,verbose=10)
     
-    return pipeline
+    return cv
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
